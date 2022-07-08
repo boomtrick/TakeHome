@@ -43,7 +43,12 @@ namespace InventoryAllocator
 
         public int GetQuantity(Product product)
         {
-            return _inventory[product];
+            if (_inventory.ContainsKey(product))
+            {
+                return _inventory[product];
+            }
+
+            return 0;
         }
 
         public int GetTotalInventory()

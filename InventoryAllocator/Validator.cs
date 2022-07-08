@@ -16,6 +16,11 @@ namespace InventoryAllocator
             {
                 var orderAsDto = JsonConvert.DeserializeObject<Order>(order);
 
+                if(orderAsDto.Lines.Count == 0)
+                {
+                    throw new Exception("No lines found");
+                }
+
                 var quantityErrorMessage = new StringBuilder();
                 foreach (var line in orderAsDto.Lines)
                 {

@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryAllocator", "Inven
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{14087467-1FE7-4394-804E-653153F6CF10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryAllocatorTests.cs", "InventoryAllocatorTests.cs\InventoryAllocatorTests.cs.csproj", "{8F5D4B90-A4AA-493D-8F50-0410DC73F984}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{14087467-1FE7-4394-804E-653153F6CF10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14087467-1FE7-4394-804E-653153F6CF10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14087467-1FE7-4394-804E-653153F6CF10}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F5D4B90-A4AA-493D-8F50-0410DC73F984}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F5D4B90-A4AA-493D-8F50-0410DC73F984}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F5D4B90-A4AA-493D-8F50-0410DC73F984}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F5D4B90-A4AA-493D-8F50-0410DC73F984}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

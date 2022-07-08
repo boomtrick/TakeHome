@@ -22,11 +22,11 @@ namespace DataSource
 
         public void RunOrderStreams()
         {
-            var stream1 = new Thread(() => SendOrder());
+            var stream1 = new Thread(() => SendOrders());
 
-            var stream2 = new Thread(() => SendOrder());
+            var stream2 = new Thread(() => SendOrders());
 
-            var stream3 = new Thread(() => SendOrder());
+            var stream3 = new Thread(() => SendOrders());
 
             stream1.Start();
             stream2.Start();
@@ -35,14 +35,15 @@ namespace DataSource
 
         }
 
-        private void SendOrder()
+        private void SendOrders()
         {
             var orderCount = 0;
+            var streamId = Guid.NewGuid();
 
             while(orderCount < 400)
             {
                 var order = BuildOrder(orderCount);
-                Facade.AddOrder(order);
+                Facade.AddOrder(order, streamId);
                 orderCount++;
             }
         }

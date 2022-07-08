@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("InventoryAllocatorTests")]
+[assembly: InternalsVisibleTo("Tests")]
 
 namespace InventoryAllocator
 {
@@ -37,18 +37,12 @@ namespace InventoryAllocator
             _validator = serviceLocator.GetValidator();
         }
 
-        public void AddOrder(string order)
+        public void AddOrder(string order, Guid streamId)
         {
             try
             {
                 _validator.ValidateOrder(order);
-                var streamId = Guid.NewGuid();
                 var orderAsDto = JsonConvert.DeserializeObject<Order>(order);
-
-                if(streamId.ToString() == "00000000-0000-0000-0000-000000000000")
-                {
-                    Console.WriteLine("YO");
-                }
                 _inventoryAllocator.AllocateOrder(streamId, orderAsDto);
             }
             catch (Exception ex)
@@ -62,7 +56,7 @@ namespace InventoryAllocator
         {
             if(ex is ValidationException)
             {
-                Console.WriteLine("Order not valid");
+                Console.WriteLine($"Order not valid.");
             }
             else
             {

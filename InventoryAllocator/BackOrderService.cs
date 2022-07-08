@@ -38,7 +38,10 @@ namespace InventoryAllocator
             if (OrdersPerStream.ContainsKey(streamId))
             {
                 var orders = OrdersPerStream[streamId];
-                return BackOrderedLinesPerOrder[orders[header]];
+                if (orders.ContainsKey(header))
+                {
+                    return BackOrderedLinesPerOrder[orders[header]];
+                }
             }
 
             return new List<Line>();

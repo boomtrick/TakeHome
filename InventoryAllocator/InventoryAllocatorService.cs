@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace InventoryAllocator
 {
     /// <summary>
-    ///     keeps track of orders and whether they have been allocated or back ordered
+    ///     keeps track of orders that have been allocated
     /// </summary>
     internal class InventoryAllocatorService : IInventoryAllocatorService
     {
@@ -48,7 +48,10 @@ namespace InventoryAllocator
             if (OrdersPerStream.ContainsKey(streamId))
             {
                 var orders = OrdersPerStream[streamId];
-                return AllocatedLinesPerOrder[orders[header]];
+                if (orders.ContainsKey(header))
+                {
+                    return AllocatedLinesPerOrder[orders[header]];
+                }
             }
 
             return new List<Line>();

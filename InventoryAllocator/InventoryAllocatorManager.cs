@@ -22,6 +22,7 @@ namespace InventoryAllocator
 
         private ConcurrentQueue<(Guid streamId, Order order)> OrderQueue;
 
+        private readonly HashSet<(Guid streamId, int header)> HeaderHistory;
         private readonly List<(Guid streamId, Order order)> OrderHistory;
 
         public InventoryAllocatorManager(IServiceLocator serviceLocator)
@@ -31,13 +32,24 @@ namespace InventoryAllocator
             _backOrderService = serviceLocator.GetBackOrderService();
             OrderQueue = new ConcurrentQueue<(Guid streamId, Order order)>();
             OrderHistory = new List<(Guid streamId, Order)>();
+            HeaderHistory = new HashSet<(Guid streamId, int header)>();
         }
 
         public void AllocateOrder(Guid streamId, Order order)
         {
-            if(_dataSource.GetTotalInventory() == 0)
+            if (_dataSource.GetTotalInventory() == 0)
             {
                 return;
+            }
+
+
+            if (HeaderHistory.Contains((streamId, order.Header)))
+            {
+                throw new ValidationException($"Header already exists for stream: {streamId}");
+            }
+            else
+            {
+                lock(HeaderHistory)HeaderHistory.Add((streamId, order.Header));
             }
 
             OrderQueue.Enqueue((streamId, order));
